@@ -7,7 +7,7 @@ import { Button } from "./ui/button";
 
 const Navbar = () => {
   return (
-    <div className="fixed w-full bg-white z-50">
+    <div className="fixed w-full bg-white z-50 shadow-sm">
       <div className=" flex items-center max-w-6xl justify-between h-14 mx-auto px-3">
         <div className="flex items-center gap-2">
           <Image src={"/icon.jpg"} alt="Logo" width={40} height={40} />
@@ -16,7 +16,7 @@ const Navbar = () => {
           </div>
         </div>
         <div className="flex items-center gap-5">
-          <div>
+          <div className="md:block hidden">
             <Navitems />
           </div>
           <div>
