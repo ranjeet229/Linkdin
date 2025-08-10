@@ -25,8 +25,20 @@ const Sidebar = ({ user }: { user: any }) => {
             <h1 className="font-bold hover:underline cursor-pointer">
               {user ? `${user?.firstName} ${user?.lastName}` : "Ranjeet Kumar"}
             </h1>
-            <p className="test-xs">@{user ? `${user?.username}` : 'username'}</p>
+            <p className="test-xs">
+              @{user ? `${user?.username}` : "username"}
+            </p>
           </div>
+        </div>
+      </div>
+      <div className="text-xs space-y-0">
+        <div className="w-full flex justify-between items-center px-3 py-2 bg-white hover:bg-gray-200 cursor-pointer">
+          <p>Post Impression</p>
+          <p className="text-blue-500 font-bold">88</p>
+        </div>
+        <div className="w-full flex justify-between items-center px-3 py-2 bg-white hover:bg-gray-200 cursor-pointer">
+          <p>Post</p>
+          <p className="text-blue-500 font-bold">0</p>
         </div>
       </div>
     </div>
