@@ -4,6 +4,7 @@ import { Post } from "@/models/post.model";
 import { IUser } from "@/models/user.model";
 import { currentUser } from "@clerk/nextjs/server"
 import { v2 as cloudinary } from 'cloudinary'
+import connectDB from "./db";
 
 cloudinary.config({ 
   cloud_name: process.env.CLOUD_NAME, 
@@ -12,6 +13,7 @@ cloudinary.config({
 });
 
 export const createPostAction = async (inputText:string, selectedFile: string) =>{
+    await connectDB();
     const user = await currentUser();
     if(!user) throw new Error ('User not authenticated');
     if(!inputText) throw new Error ('Input field is required');
@@ -24,14 +26,15 @@ export const createPostAction = async (inputText:string, selectedFile: string) =
         userId:user.id,
         profilePhoto:user.imageUrl
     }
-
+    let uploadResponse;
     try {
         // create post with image
         if(image){
+            uploadResponse = await cloudinary.uploader.upload(image);
             await Post.create({
                 description:inputText,
                 user: userDatabase,
-                imageUrl: // uyaha par image url ayega from cloudinary se
+                imageUrl: uploadResponse?.secure_url// uyaha par image url ayega from cloudinary se
             })
         }else {
             //2. create post with text only 
